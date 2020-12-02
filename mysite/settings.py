@@ -18,9 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '^w(3at+g%$ni6eyz%e!j!^$db+2a=m#sf+a58bm+lyiaf_j+1!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['speakup-heroku.herokuapp.com', '127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
 # Application definition
