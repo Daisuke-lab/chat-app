@@ -17,7 +17,7 @@ def get_profile(request, pk):
     if pk:
         user = get_object_or_404(User, pk=pk)
         profile = get_object_or_404(Profile, user=user)
-        print(profile.id)
+        print('profile',profile.image)
         serializer =ProfileSerializer(profile)
 
         return Response(serializer.data)

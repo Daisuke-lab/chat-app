@@ -19,9 +19,9 @@ SECRET_KEY = '^w(3at+g%$ni6eyz%e!j!^$db+2a=m#sf+a58bm+lyiaf_j+1!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #True
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['speakup-heroku.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['speakup-heroku.herokuapp.com', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
 # Application definition
