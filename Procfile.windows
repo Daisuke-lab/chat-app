@@ -1,2 +1,2 @@
 web: python manage.py runserver 0.0.0.0:5000
-worker: Redis.redis-server.exe
+worker: Redis/redis-server.exe
