@@ -204,3 +204,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 #https://pypi.org/project/django-cors-headers/ <--- to work axios in localhost3000
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+
+CACHES = {
+    "default": {
+         "BACKEND": "redis_cache.RedisCache",
+         "LOCATION": os.environ.get('REDIS_URL'),
+    }
+}
