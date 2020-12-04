@@ -1,2 +1,2 @@
 web: gunicorn mysite.wsgi --log-file -
-worker: Redis.redis-server.exe
+worker: Redis/redis-server.exe
