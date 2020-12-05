@@ -143,7 +143,13 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# LOGIN_REDIRECT_URL = 'localhost:3000/'
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -198,8 +204,7 @@ SITE_ID = 5
 #CORS_ORIGIN_ALLOW_ALL = True # added XHTMLrequest cors
 
 
-MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
 
 
 #https://pypi.org/project/django-cors-headers/ <--- to work axios in localhost3000
