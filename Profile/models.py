@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='profile')
-    name = models.CharField(max_length=10, null=True)
+    name = models.CharField(max_length=20, null=True)
     age = models.CharField(blank=True, null=True, max_length=3)
     gender = models.CharField(blank=True, max_length=10, null=True)
     native_lan = models.CharField(max_length=20)
