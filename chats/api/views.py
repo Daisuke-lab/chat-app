@@ -59,7 +59,7 @@ def get_chats(request, pk):
                     print(json.dumps(str(profile.image)))
                     friend_object = {
                         'Chat_ID': chat_id,
-                        'image': 'http://localhost:8000/images/' + str(profile.image),
+                        'image': 'https://speakup-heroku.herokuapp.com/images/' + str(profile.image),
                         'name': profile.name
                     }
                     chats_list.append(friend_object)
