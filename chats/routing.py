@@ -6,6 +6,6 @@ websocket_urlpatterns = [
     #"/$" implys you have to end path with "/"
     #"\w" implys any number
 
-
-    re_path(r'^ws/chat/(?P<room_name>[^/]+)/$', consumers.ChatConsumer),
+#ws => wss
+    re_path(r'^wss/chat/(?P<room_name>[^/]+)/$', consumers.ChatConsumer),
 ]
