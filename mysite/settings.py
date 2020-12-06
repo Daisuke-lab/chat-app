@@ -83,7 +83,7 @@ CHANNEL_LAYERS = {#DIFFERENCE
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('speakup-heroku.herokuapp.com', 10169)],
+            "hosts": [('speakup-heroku.herokuapp.com', 6379)],
         },
     },
 }
@@ -221,12 +221,13 @@ CACHES = {
     }
 }
 BROKER_URL = os.environ.get("REDIS_URL")
-CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL")
 
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL")
+
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_ACCEPT_CONTENT = ['json']
 
 
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
