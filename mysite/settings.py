@@ -220,6 +220,13 @@ CACHES = {
          "LOCATION": os.environ.get('REDIS_URL'),
     }
 }
+BROKER_URL = os.environ.get("REDIS_URL")
+CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL")
+
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+
 
 import django_heroku
 django_heroku.settings(locals())
