@@ -27,6 +27,7 @@ AUTH_USER_MODEL = 'accounts.UserAccount'
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic' #added 
     'corsheaders',
     'channels',
     'django.contrib.admin',
@@ -138,18 +139,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
-]
-#static => staticfiles
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
 
@@ -231,3 +220,17 @@ BROKER_URL = os.environ.get("REDIS_URL")
 
 import django_heroku
 django_heroku.settings(locals())
+
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static')
+]
+#static => staticfiles
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
