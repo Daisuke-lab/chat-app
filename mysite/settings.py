@@ -229,5 +229,5 @@ BROKER_URL = os.environ.get("REDIS_URL")
 # CELERY_ACCEPT_CONTENT = ['json']
 
 
-# import django_heroku
-# django_heroku.settings(locals())
+import django_heroku
+django_heroku.settings(locals())
