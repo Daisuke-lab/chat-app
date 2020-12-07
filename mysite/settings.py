@@ -221,17 +221,17 @@ BROKER_URL = os.environ.get("REDIS_URL")
 import django_heroku
 django_heroku.settings(locals())
 
-
+#/static/
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
-    os.path.join(BASE_DIR, 'static/images'),
 ]
 #static => staticfiles
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/images/'
+#/images/
+MEDIA_URL = 'http://speakup-heroku.herokuapp.com/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
