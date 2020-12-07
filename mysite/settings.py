@@ -27,8 +27,8 @@ AUTH_USER_MODEL = 'accounts.UserAccount'
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic', #added 
     'corsheaders',
+    'whitenoise.runserver_nostatic', #added 
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -233,5 +233,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #/images/
-MEDIA_URL = 'http://speakup-heroku.herokuapp.com/'
+MEDIA_URL = 'speakup-heroku.herokuapp.com/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
