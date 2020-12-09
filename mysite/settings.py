@@ -226,14 +226,15 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
+    os.path.join(BASE_DIR, 'static')
 ]
 #static => staticfiles
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #/images/
 MEDIA_URL = '/images/'
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-MEDIA_ROOT = 'speakup-heroku.herokuapp.com/static/images'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+# MEDIA_ROOT = 'speakup-heroku.herokuapp.com/static/images'
