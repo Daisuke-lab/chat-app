@@ -6,7 +6,7 @@ User = get_user_model()
 #This is for making friends
 class Contact(models.Model):
     #defining friends as 'self' allows you to add user to friend when either user1 or user2 add friend
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contact_user')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='contact_user')
     friends = models.ManyToManyField('self', blank=True, related_name='friends')
 
 
@@ -28,6 +28,7 @@ class Message(models.Model):
 class Chat(models.Model):
     participants = models.ManyToManyField(Contact, related_name='chats')
     messages = models.ManyToManyField(Message, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 
     def last_30_messages(self):
