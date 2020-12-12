@@ -47,11 +47,14 @@ def get_chats(request, pk):
         contact = get_object_or_404(Contact, user=user)
         chatid_list = []
         for chat in contact.chats.values():
-            print(chat['id'])
             chatid_list.append(chat['id'])
+            print('chat::',chat)
         chats_list = []
         for chat_id in chatid_list:
             chat = get_object_or_404(Chat, id=chat_id)
+            print('chat2::', chat.messages.order_by('-timestamp').all()[0].content)
+            last_message = chat.messages.order_by('-timestamp').all()[0].content
+            #chat.participants.all().values() is you and friend
             for user in chat.participants.all().values():
                 friend_id = user['user_id']
                 if friend_id != pk:
@@ -60,7 +63,11 @@ def get_chats(request, pk):
                     friend_object = {
                         'Chat_ID': chat_id,
                         'image': 'https://speakup-heroku.herokuapp.com/images/' + str(profile.image),
-                        'name': profile.name
+                        'profile_id': profile.id,
+                        'name': profile.name,
+                        'timestamp': chat.timestamp,
+                        'last_message':last_message
+
                     }
                     chats_list.append(friend_object)
 

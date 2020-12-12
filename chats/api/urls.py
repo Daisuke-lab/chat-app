@@ -7,6 +7,7 @@ app_name='chat'
 
 
 urlpatterns = [
+    path('chat/', ChatListView.as_view()),
     path('chat/<int:pk>/', get_chats),
     path('chat/create/', create_chat),
     path('chat/detail/<pk>/', ChatDetailView.as_view()),
