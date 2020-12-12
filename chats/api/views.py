@@ -54,6 +54,7 @@ def get_chats(request, pk):
             chat = get_object_or_404(Chat, id=chat_id)
             print('chat2::', chat.messages.order_by('-timestamp').all()[0].content)
             last_message = chat.messages.order_by('-timestamp').all()[0].content
+            last_timestamp = chat.messages.order_by('-timestamp').all()[0].timestamp
             #chat.participants.all().values() is you and friend
             for user in chat.participants.all().values():
                 friend_id = user['user_id']
@@ -65,8 +66,9 @@ def get_chats(request, pk):
                         'image': 'https://speakup-heroku.herokuapp.com/images/' + str(profile.image),
                         'profile_id': profile.id,
                         'name': profile.name,
-                        'timestamp': chat.timestamp,
-                        'last_message':last_message
+                        'when_matched': chat.timestamp,
+                        'last_message':last_message,
+                        'last_timestamp': last_timestamp
 
                     }
                     chats_list.append(friend_object)
