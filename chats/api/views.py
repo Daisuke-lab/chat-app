@@ -52,9 +52,12 @@ def get_chats(request, pk):
         chats_list = []
         for chat_id in chatid_list:
             chat = get_object_or_404(Chat, id=chat_id)
-            print('chat2::', chat.messages.order_by('-timestamp').all()[0].content)
-            last_message = chat.messages.order_by('-timestamp').all()[0].content
-            last_timestamp = chat.messages.order_by('-timestamp').all()[0].timestamp
+            if len(chat.messages.order_by('-timestamp').all()) > 0:
+                last_message = chat.messages.order_by('-timestamp').all()[0].content
+                last_timestamp = chat.messages.order_by('-timestamp').all()[0].timestamp
+            else:
+                last_message = ''
+                last_timestamp = ''
             #chat.participants.all().values() is you and friend
             for user in chat.participants.all().values():
                 friend_id = user['user_id']
