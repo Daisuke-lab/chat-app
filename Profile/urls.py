@@ -8,5 +8,5 @@ urlpatterns = [
     # path('detail/<int:pk>/', MyProfileView.as_view()),
     path('delete/<int:pk>/', MyProfileView.as_view()),
     path('detail/<pk>/', get_profile),
-    paath('friend/<pk>/', MyProfileView.as_view())
+    path('friend/<pk>/', MyProfileView.as_view())
 ]
