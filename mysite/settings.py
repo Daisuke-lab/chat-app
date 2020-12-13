@@ -146,7 +146,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'speakup.team.zr@gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = 'oentswepntjbfmwn'
+EMAIL_HOST_PASSWORD = 'czogwqexzzlrmjia'
+#oentswepntjbfmwn
 EMAIL_USE_TLS = True
 
 CELERY_BROKER_URL = 'redis://:p0a016fab70bed90166f9ab834e8cbd2f719d85bc1b6bec06eeecc4dbe7f637fd@ec2-54-197-63-194.compute-1.amazonaws.com:10169'
