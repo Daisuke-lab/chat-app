@@ -7,5 +7,6 @@ urlpatterns = [
     path('update/<int:pk>/', MyProfileView.as_view()),
     # path('detail/<int:pk>/', MyProfileView.as_view()),
     path('delete/<int:pk>/', MyProfileView.as_view()),
-    path('detail/<pk>/', get_profile)
+    path('detail/<pk>/', get_profile),
+    paath('friend/<pk>/', MyProfileView.as_view())
 ]
