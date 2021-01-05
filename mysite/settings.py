@@ -6,7 +6,7 @@ import os
 from datetime import timedelta
 import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-
+host = 'speakup-heroku.herokuapp.com'
 
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) #DIFFERENCE
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,8 +42,19 @@ INSTALLED_APPS = [
     'accounts',
     'chats',
     'djoser',
-    'Profile'
+    'Profile',
+    'django_filters',
+    's3direct',
+    'storages',
+    # 'easy_thumbnails',  => crop
+    # 'image_cropping',
 ]
+
+# from easy_thumbnails.conf import Settings as thumbnail_settings
+# THUMBNAIL_PROCESSORS = (
+#     'image_cropping.thumbnail_processors.crop_corners',  => crop
+# ) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -164,6 +175,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication', # comma is required
         # 'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {
@@ -237,6 +249,32 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #/images/
 MEDIA_URL = '/images/'
 
-#static/image
-MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#static/images
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 # MEDIA_ROOT = 'speakup-heroku.herokuapp.com/static/images'
+
+#AKIAI4773JDWNNW6YPTQ
+AWS_ACCESS_KEY_ID = 'AKIAZSSQTD2BHK4DURTE'
+#3H15sU0TU8BAlBF/pjOyG3NiG3EaWxaIK9qU6i+N
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'speakup-image-storage'
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_ENDPOINT_URL =  'https://s3.us-east-2.amazonaws.com'
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+# It is for displaying other files besides image
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1554707441515",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::　/*"
+        }
+    ]
+}

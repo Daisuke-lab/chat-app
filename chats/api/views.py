@@ -8,9 +8,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 from django.http import JsonResponse
+from django.core.files.storage import get_storage_class
 import sys
 sys.path.append('../')
-from Profile.models import Profile 
+from Profile.models import Profile , Picture
+
 
 
 
@@ -42,7 +44,6 @@ def create_chat(request):
 @api_view(['GET'])
 def get_chats(request, pk):
     if pk:
-        print('pk::', pk)
         user = get_object_or_404(User, id=pk)
         contact = get_object_or_404(Contact, user=user)
         chatid_list = []
@@ -50,23 +51,28 @@ def get_chats(request, pk):
             chatid_list.append(chat['id'])
             print('chat::',chat)
         chats_list = []
+        print(chatid_list)
         for chat_id in chatid_list:
             chat = get_object_or_404(Chat, id=chat_id)
             if len(chat.messages.order_by('-timestamp').all()) > 0:
                 last_message = chat.messages.order_by('-timestamp').all()[0].content
                 last_timestamp = chat.messages.order_by('-timestamp').all()[0].timestamp
             else:
-                last_message = ''
-                last_timestamp = ''
+                last_message = "Let's start chatting!"
+                last_timestamp = 'Start now'
             #chat.participants.all().values() is you and friend
             for user in chat.participants.all().values():
                 friend_id = user['user_id']
                 if friend_id != pk:
                     profile = get_object_or_404(Profile, user=friend_id)
-                    print(json.dumps(str(profile.image)))
+                    images = Picture.objects.filter(album=profile)
+                    image = ""
+                    if len(images) > 0:
+                        image = str(images[0])
+
                     friend_object = {
                         'Chat_ID': chat_id,
-                        'image': 'https://speakup-heroku.herokuapp.com/images/' + str(profile.image),
+                        'image': image,
                         'profile_id': profile.id,
                         'name': profile.name,
                         'when_matched': chat.timestamp,

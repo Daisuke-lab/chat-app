@@ -23,11 +23,19 @@ class Message(models.Model):
     def __str__(self):
         return self.contact.user.name
 
+class File(models.Model):
+    contact = models.ForeignKey(Contact, related_name='files', on_delete=models.CASCADE)
+    chat_file = models.FileField(blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{}'.format(self.chat_file)
 
 #This is for fetching messages
 class Chat(models.Model):
     participants = models.ManyToManyField(Contact, related_name='chats')
     messages = models.ManyToManyField(Message, blank=True)
+    files = models.ManyToManyField(File, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
 

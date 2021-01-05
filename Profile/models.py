@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from s3direct.fields import S3DirectField
+from image_cropping import ImageRatioField
+from django.core.files.storage import get_storage_class
 User = get_user_model()
 # Create your models here.
 
@@ -12,7 +15,6 @@ class Profile(models.Model):
     gender = models.CharField(blank=True, max_length=10, null=True)
     native_lan = models.CharField(max_length=20)
     foreign_lan = models.CharField(max_length=20)
-    image = models.ImageField(blank=True, null=True)
     location = models.CharField(blank=True, max_length=30, null=True)
     time_start = models.TimeField(blank=True, null=True)
     time_end = models.TimeField(blank=True, null=True)
@@ -21,6 +23,26 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.name
+
+class Picture(models.Model):
+    #upload_to='images/'
+    image = models.ImageField()
+    x = models.FloatField(null=True)
+    y = models.FloatField(null=True)
+    width = models.FloatField(null=True)
+    height = models.FloatField(null=True)
+    #image = S3DirectField(dest='primary_destination', blank=True)
+    # cropping = ImageRatioField('image', '430x360')
+    album = models.ForeignKey(Profile, related_name='images', on_delete=models.CASCADE)
+
+    def __str__(self):
+        media_storage = get_storage_class()()
+        image = media_storage.url(str(self.image))
+        return '{}'.format(image)
+
+    # def get_absolute_url(self):
+    #     return 
+
 
 class Swipe(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='swipe')
