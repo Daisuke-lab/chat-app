@@ -1,0 +1,4 @@
+.env
+Pipfile
+.gitignore
+Pipfile.lock
