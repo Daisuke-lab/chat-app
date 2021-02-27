@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from s3direct.fields import S3DirectField
-from image_cropping import ImageRatioField
 from django.core.files.storage import get_storage_class
 User = get_user_model()
 # Create your models here.

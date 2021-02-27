@@ -55,8 +55,7 @@ class ChatConsumer(WebsocketConsumer):
         base64_files = data['files']
         if len(base64_files) > 0:
             for base64_file in base64_files:
-                format, imgstr = base64_file['file'].split(';base64,') 
-                ext = format.split('/')[-1]
+                file_format, imgstr = base64_file['file'].split(';base64,')
                 chat_file = ContentFile(base64.b64decode(imgstr), name=base64_file['name'])
                 file = File.objects.create(
                 contact=user_contact,
@@ -70,10 +69,10 @@ class ChatConsumer(WebsocketConsumer):
                 completed_file['name'] = data['from']
                 content = {
                     'command': 'new_message',
-                    'files': [self.file_to_json(completed_file)]
+                    'file': [self.file_to_json(completed_file)]
                 }
 
-                return self.send_chat_messages(content)
+                return self.send_chat_files(content)
         
 
         
@@ -208,23 +207,23 @@ class ChatConsumer(WebsocketConsumer):
         #self.room_group_name is group name which is created in conncect()
         #{'type': 'chat_message','message': message} is an actual data to be stored in redis
         print('MESSAGE in send_chat_message')
-        if message.content:
-            async_to_sync(self.channel_layer.group_send)(
-                self.room_group_name,
-                {
-                    'type': 'chat_message',
-                    'message': message
-                }
-            )
+        async_to_sync(self.channel_layer.group_send)(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': message
+            }
+        )
 
-        else:
-            async_to_sync(self.channel_layer.group_send)(
-                self.room_group_name,
-                {
-                    'type': 'chat_message',
-                    'file': message
-                }
-            )
+    def send_chat_files(self, file):
+        print('FILE in send_chat_file')
+        async_to_sync(self.channel_layer.group_send)(
+            self.room_group_name,
+            {
+                'type': 'chat_file',   #chat_message is a function even though it is str
+                'file': file
+            }
+        )
 
 
     def send_message(self, message):
@@ -237,3 +236,8 @@ class ChatConsumer(WebsocketConsumer):
         message = event['message']
         # Send message to WebSocket
         self.send(text_data=json.dumps(message))
+
+    def chat_file(self, event):
+        file = event['file']
+        # Send message to WebSocket
+        self.send(text_data=json.dumps(file))

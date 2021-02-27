@@ -11,9 +11,15 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, renderer_classes
 from .filters import ProfileFilter
 import django_filters.rest_framework
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, Http404, HttpResponseRedirect
 from django.core.files.storage import get_storage_class
 from PIL import Image
+import os
+from django.conf import settings
+import boto
+import boto3
+from django.core import serializers
+
 
 User = get_user_model()
 
@@ -65,14 +71,16 @@ CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin):
         return self.destroy(request, pk)
 
 class ProfileList(ListAPIView):
-    queryset = Picture.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     filterset_class = ProfileFilter
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
 
+
 class ImageListCreate(ListCreateAPIView):
     queryset = Picture.objects.all()
     serializer_class = ImageSerializer
+
 
 
 class ImageDetail(RetrieveUpdateDestroyAPIView):
@@ -97,6 +105,8 @@ class ImageDetail(RetrieveUpdateDestroyAPIView):
 
         #return Response(images_list, content_type="application/json")
         return JsonResponse({'images':images_list})
+
+
 
 
 
