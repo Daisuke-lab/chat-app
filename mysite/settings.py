@@ -261,9 +261,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 #AKIAI4773JDWNNW6YPTQ
 AWS_ACCESS_KEY_ID = 'AKIAZSSQTD2BHK4DURTE'
-AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
 if deploy:
     AWS_SECRET_ACCESS_KEY = os.environ('AWS_SECRET_ACCESS_KEY')
+else:
+    AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'speakup-image-storage'
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_ENDPOINT_URL =  'https://s3.us-east-2.amazonaws.com'
