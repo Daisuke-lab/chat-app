@@ -217,7 +217,6 @@ SITE_ID = 5
 
 
 
-#https://pypi.org/project/django-cors-headers/ <--- to work axios in localhost3000
 CORS_ORIGIN_ALLOW_ALL = True
 
 
