@@ -7,6 +7,7 @@ from datetime import timedelta
 import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 host = 'speakup-heroku.herokuapp.com'
+deploy = True
 
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) #DIFFERENCE
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -260,9 +261,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 #AKIAI4773JDWNNW6YPTQ
 AWS_ACCESS_KEY_ID = 'AKIAZSSQTD2BHK4DURTE'
-#3H15sU0TU8BAlBF/pjOyG3NiG3EaWxaIK9qU6i+N
-#AWS_SECRET_ACCESS_KEY = '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'
 AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
+if deploy:
+    AWS_SECRET_ACCESS_KEY = os.environ('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'speakup-image-storage'
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_ENDPOINT_URL =  'https://s3.us-east-2.amazonaws.com'
