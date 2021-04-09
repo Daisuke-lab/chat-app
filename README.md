@@ -1,5 +1,5 @@
 # chatapp-backend
-http://speakup-heroku.herokuapp.com
+https://speakup-heroku.herokuapp.com
 
 ### 仮email(example email): speakup.example@gmail.com
 
